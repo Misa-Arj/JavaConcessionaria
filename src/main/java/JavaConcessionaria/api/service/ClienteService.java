@@ -48,10 +48,8 @@ public class ClienteService {
 
     }
 
-    public Cliente updateFromDto(Cliente cliente) {
-            Cliente clienteToUpdate = findCliente(cliente.getId());
-            updateData(clienteToUpdate, cliente);
-            return repository.save(clienteToUpdate);
+    public void updateCliente(@RequestBody @Valid Cliente cliente){
+        repository.getReferenceById(cliente.getId());
     }
 
     private void updateData(Cliente clienteToUpdate, Cliente cliente) {
