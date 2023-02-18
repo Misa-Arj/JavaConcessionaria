@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.List;
 
 @RestController
 @RequestMapping("/clientes")
@@ -24,7 +25,7 @@ public class ClienteController {
     @Transactional
     public void cadastrar(@RequestBody @Valid ClienteDto dados){
         //var carro = new Carro();
-        service.salvar(dados);
+        service.save(dados);
         //carro.setData_compra(LocalDateTime.now(ZoneId.of("UTC")));
     }
 
@@ -49,4 +50,25 @@ public class ClienteController {
 
         return ResponseEntity.ok().body(sb);
     }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Cliente> findAll(){
+        return service.findAll();
+    }
+
+    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    public ResponseEntity<Void> deleteCliente(@PathVariable Integer id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Void> updateCliente(@PathVariable Integer id,
+                                              @RequestBody Cliente dados){
+        Cliente cliente = service.updateFromDto(dados);
+        cliente.setId(id);
+        service.updateFromDto(cliente);
+        return ResponseEntity.noContent().build();
+    }
+
 }
