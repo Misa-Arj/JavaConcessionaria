@@ -62,13 +62,13 @@ public class ClienteController {
         return ResponseEntity.noContent().build();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> updateCliente(@PathVariable Integer id,
-                                              @RequestBody Cliente dados){
-        Cliente cliente = service.updateFromDto(dados);
-        cliente.setId(id);
-        service.updateFromDto(cliente);
-        return ResponseEntity.noContent().build();
-    }
+//    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+//    public ResponseEntity<Void> updateCliente(@PathVariable Integer id,
+//                                              @RequestBody Cliente dados){
+//        Cliente cliente = service.updateFromDto(dados);
+//        cliente.setId(id);
+//        service.updateFromDto(cliente);
+//        return ResponseEntity.noContent().build();
+//    }
 
 }
